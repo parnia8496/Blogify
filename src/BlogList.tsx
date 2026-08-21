@@ -1,12 +1,22 @@
+type Props = {
+  category: string;
+  setCategory: React.Dispatch<React.SetStateAction<string>>;
+};
 
-const BlogList = () => {
+const BlogList = ({ setCategory }: Props) => {
+  const categories = ["All", "Technology", "Startup", "Lifestyle", "Finance"];
+
   return (
-    <div className="flex justify-evenly gap-1 text-gray-300 mt-10 ">
-      <span>All</span>
-      <span>Technology</span>
-      <span>Startup</span>
-      <span>Life style</span>
-      <span>Finance</span>
+    <div className="flex justify-evenly gap-1 text-gray-300 mt-10">
+      {categories.map((item) => (
+        <span
+          key={item}
+          onClick={() => setCategory(item)}
+          className="cursor-pointer hover:text-white"
+        >
+          {item}
+        </span>
+      ))}
     </div>
   );
 };

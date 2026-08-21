@@ -102,13 +102,25 @@ export const BlogData: Blog[] = [
   },
 ];
 
-export default function BlogList() {
+type Props = {
+  search: string;
+  category: string;
+};
+
+export default function BlogCategory({ search, category }: Props) {
+  const filteredBlogs = BlogData.filter((blog) => {
+    const matchSearch = blog.title.toLowerCase().includes(search.toLowerCase());
+
+    const matchCategory = category === "All" || blog.category === category;
+
+    return matchSearch && matchCategory;
+  });
   return (
-    <section className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mt-10">
-      {BlogData.map((blog) => (
+    <section className=" grid gap-8 md:grid-cols-2 lg:grid-cols-3 mt-10">
+      {filteredBlogs.map((blog) => (
         <article
           key={blog.id}
-          className="overflow-hidden rounded-xl border bg-gray-800 shadow-sm"
+          className="hover:scale-110 transition-all duration-500 overflow-hidden rounded-xl border bg-gray-800 shadow-sm"
         >
           <img
             src={blog.image}
@@ -116,12 +128,14 @@ export default function BlogList() {
             className="h-56 w-full object-cover"
           />
 
-          <div className="p-5">
+          <div className="p-5 ">
             <span className="rounded bg-gray-600 px-3 py-1 text-sm text-gray-300">
               {blog.category}
             </span>
 
-            <h2 className="mt-3 text-xl font-semibold text-white">{blog.title}</h2>
+            <h2 className="mt-3 text-xl font-semibold text-white">
+              {blog.title}
+            </h2>
 
             <p className="mt-2 text-gray-300">{blog.description}</p>
 

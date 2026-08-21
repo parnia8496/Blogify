@@ -24,5 +24,5 @@
 }
 body {
   font-family: "Outfit", sans-serif;
-  @apply bg-gray-900 px-10 py-5
+  @apply bg-gray-900 px-10 py-5 m-0
 }
